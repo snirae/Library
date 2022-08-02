@@ -2,9 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>SEARCH</title>
 </head>
 <body>
+    <div class="content">
+        <h1>SEARCH</h1>
 
+        <div class="search-bar">
+
+            <div>
+                <input type="radio" id="all" name="search_in" value="all" checked>
+                <label for="all">All</label>
+                <input type="radio" id="tzomet" name="search_in" value="tzomet">
+                <label for="tzomet">Tzomet Sfarim</label>
+                <input type="radio" id="stei" name="search_in" value="stei">
+                <label for="stei">Steimazki</label>
+            </div>
+
+            <form action="{{ url_for('search') }}" method="POST">
+
+                <select name="search_by">
+                    <optgroup label="Search by">
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                    </optgroup>
+                </select>
+
+                <input type="text" name="search" placeholder="Search Book">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+
+        <div class="search-results">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Year</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.year }}</td>
+                            <td>{{ book.price }}</td>
+                            <td>
+                                <a href="{{ url_for('book_description', book_id=book.id) }}">description</a>
+                            </td>
+                            <td>
+                                <form action="{{ url_for('add_book') }}" method="POST">
+                                    <input type="hidden" name="book_id" value="{{ book.id }}">
+                                    <input type="submit" value="ADD">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </body>
 </html>

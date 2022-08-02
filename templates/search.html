@@ -11,21 +11,21 @@
 
         <div class="search-bar">
 
-            <div>
-                <input type="radio" id="all" name="search_in" value="all" checked>
-                <label for="all">All</label>
-                <input type="radio" id="tzomet" name="search_in" value="tzomet">
-                <label for="tzomet">Tzomet Sfarim</label>
-                <input type="radio" id="stei" name="search_in" value="stei">
-                <label for="stei">Steimazki</label>
-            </div>
-
             <form action="{{ url_for('search') }}" method="POST">
+
+                <div>
+                    <input type="radio" id="google" name="search_in" value="google" checked>
+                    <label for="all">Google</label>
+                    <input type="radio" id="tzomet" name="search_in" value="tzomet">
+                    <label for="tzomet">Tzomet Sfarim</label>
+                    <input type="radio" id="stei" name="search_in" value="stei">
+                    <label for="stei">Steimazki</label>
+                </div>
 
                 <select name="search_by">
                     <optgroup label="Search by">
-                        <option value="title">Title</option>
-                        <option value="author">Author</option>
+                        <option name="search_by" value="title">Title</option>
+                        <option name="search_by" value="author">Author</option>
                     </optgroup>
                 </select>
 
